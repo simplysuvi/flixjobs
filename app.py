@@ -18,7 +18,7 @@ def clear_multi():
     return
 
 
-st.title("Netflix Jobs Dashboard :globe_with_meridians:")
+st.title(":red[N]etflix Jobs Dashboard :globe_with_meridians:")
 
 # LOAD DATA
 jobs_df = pd.read_json('data/netflix_all_jobs.json')
