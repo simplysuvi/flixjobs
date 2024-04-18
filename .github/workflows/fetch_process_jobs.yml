@@ -1,0 +1,52 @@
+name: Fetch and Process Netflix Job Postings
+
+on:
+  # schedule:
+  #   - cron: '0 9 * * *'  # 5 AM EDT -> 9 AM UTC
+  #   - cron: '0 22 * * *' # 6 PM EDT -> 10 PM UTC
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch_and_process:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install requests pandas
+
+      - name: Run the extraction script
+        run: python fetch_jobs.py
+
+      - name: Run the processing script
+        run: python process_data.py
+        
+      - name: Save last updated timestamp as artifact
+        run: |
+          echo "$(date +'%Y-%m-%d %H:%M:%S GMT')" > last_updated.txt
+          echo "::set-output name=last_updated::last_updated.txt"
+        shell: bash
+
+      - name: Upload last updated timestamp as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: last-updated-timestamp
+          path: last_updated.txt
+
+      - name: Commit and push if there are changes
+        run: |
+          git config user.email "simplysuvii@gmail.com"
+          git config user.name "GitHub Actions Bot - FlixJobs"
+          git remote set-url origin https://x-access-token:${{ secrets.MY_GITHUB_TOKEN }}@github.com/simplysuvi/flixjobs.git
+          git pull
+          git add -A
+          git commit -m "Update job postings and process data" -a || echo "No changes to commit"
+          git push
