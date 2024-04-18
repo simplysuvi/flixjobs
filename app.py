@@ -8,7 +8,7 @@ import pytz
 from datetime import datetime, timedelta
 from plot_functions import plot_timeline, plot_dayoftheweek, plot_months, plot_timeoftheday, plot_jobs_by_location, plot_jobs_by_team, plot_jobs_by_subteam, plot_daysActive
 
-st.set_page_config(page_title='Netflix Jobs Dashboard', layout="wide")
+st.set_page_config(page_title='Netflix Jobs Dashboard', layout="wide", page_icon='assets/favicon.ico')
 
 
 def clear_multi():
