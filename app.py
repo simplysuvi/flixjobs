@@ -6,6 +6,7 @@ import os
 import json
 import pytz
 from datetime import datetime, timedelta
+from plot_functions import plot_timeline, plot_dayoftheweek, plot_months, plot_timeoftheday, plot_jobs_by_location, plot_jobs_by_team, plot_daysActive
 
 st.set_page_config(page_title='Netflix Jobs Dashboard', layout="wide")
 
