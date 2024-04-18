@@ -133,7 +133,7 @@ def plot_daysActive(df):
                     title='Distribution of Days Jobs Have Been Active',
                     labels={'Days Active': 'Days Active'},
                     nbins=40,
-                    color_discrete_sequence=['#2CA02C'])
+                    color_discrete_sequence=['red'])
 
     fig.update_layout(
         xaxis_title='Days Active',
