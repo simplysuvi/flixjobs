@@ -27,7 +27,7 @@ def get_job_infos(response):
                 'Id': website['external_id'],
                 'Title': website['text'],
                 'Team': website.get('team','subteam')[0],
-                'Subteam': website.get('lever_team',"N/A")
+                'Subteam': website.get('lever_team',"N/A"),
                 'Location': website['location'],
                 'Posting Date Time': website['created_at'],
                 'Job URL': f"https://jobs.netflix.com/jobs/{website['external_id']}"
