@@ -10,7 +10,7 @@ def plot_timeline(df):
                   title='Timeline of Netflix Job Postings', markers=True,
                  labels={'Title': 'Number of Jobs', 'Posting Date Time': 'Date'})
     fig.update_traces(marker=dict(color='black',size=8),
-                      line=dict(color='lightgreen',width=3),
+                      line=dict(color='lightred',width=3),
                       hovertemplate='<b>Date: %{x}</b><br><b>Jobs Posted: %{y}</b>')
 
     # Update layout
