@@ -127,7 +127,7 @@ with st.container(border=False):
             st.metric(label=label, value=count, delta=delta)
 
 
-columns_to_display = [col for col in jobs_df.columns if col not in ['Id', 'Posting Date Time','Day of Week','Posting Time','Hour', 'Month']]
+columns_to_display = [col for col in jobs_df.columns if col not in ['Id', 'Posting Date Time','Day of Week','Posting Time','Hour', 'Month', 'Team']]
 st.dataframe(jobs_df[columns_to_display],use_container_width=True,hide_index=True)
 
 # Read timestamp from file
