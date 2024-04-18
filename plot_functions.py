@@ -39,6 +39,10 @@ def plot_dayoftheweek(df):
     return fig
 
 def plot_months(df):
+    month_order = ['January', 'February', 'March', 'April', 'May', 'June', 
+                   'July', 'August', 'September', 'October', 'November', 'December']
+    df['Month'] = pd.Categorical(df['Month'], categories=month_order, ordered=True)
+    
     # Count occurrences of each month
     monthly_counts = df['Month'].value_counts().sort_index()
     
@@ -52,7 +56,7 @@ def plot_months(df):
     fig.update_traces(marker=dict(color='black',size=6),
                       line=dict(color='red',width=3),
                       hovertemplate='<b>Month: %{x}</b><br><b>Jobs Posted: %{y}</b>')
-    fig.update_xaxes(range=[1,12], dtick=1)
+    fig.update_xaxes(tickmode='array', tickvals=list(range(len(monthly_counts))), ticktext=monthly_counts.index)
     return fig
 
 def plot_timeoftheday(df):
