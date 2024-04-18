@@ -192,4 +192,4 @@ else:
 
 # Add a copyright notice at the bottom of the app
 current_year = datetime.now().year
-st.markdown(f"---\n**©** {current_year} Made and Managed with :heart: by **Suvrat Jain**. This app is not affiliated with Apple Inc. in any way.", unsafe_allow_html=True)
+st.markdown(f"---\n**©** {current_year} Made and Managed with :heart: by **Suvrat Jain**. This app is not affiliated with Netflix Inc. in any way.", unsafe_allow_html=True)
