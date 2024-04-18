@@ -41,8 +41,8 @@ jobs_df['Month'] = (pd.to_datetime(jobs_df['Posting Date'])).dt.to_period('M').d
 jobs_df = jobs_df.sort_values(by='Posting Date Time', ascending=False)
 
 # IDENTIFY RECENTLY ADDED AND REMOVED JOBS
-added_jobs = None
-removed_jobs = None
+added_jobs = 0
+removed_jobs = 0
 if not recent_added_jobs.empty:
     recent_added_ids = recent_added_jobs['Id'].tolist()
     added_jobs = jobs_df[jobs_df['Id'].isin(recent_added_ids)]
