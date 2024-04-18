@@ -45,7 +45,7 @@ def main():
   for job_info in get_all_jobs(pages):
       jobs_data.append(job_info)
 
-  with open('data/netflix_jobs_master.json', 'w') as f:
+  with open('data/netflix_jobs_new.json', 'w') as f:
       json.dump(jobs_data, f)
 
 
