@@ -1,0 +1,34 @@
+name: Fetch Netflix Job Postings
+
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch_and_commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          pip install requests pandas
+
+      - name: Run the extraction script
+        run: python fetch_jobs.py
+
+      - name: Commit and push if there are changes
+        run: |
+          git config user.email "simplysuvii@gmail.com"
+          git config user.name "GitHub Actions Bot - FlixJobs"
+          git remote set-url origin https://x-access-token:${{ secrets.MY_GITHUB_TOKEN }}@github.com/simplysuvi/flixjobs.git
+          git pull
+          git add -A
+          git commit -m "Fetch job postings from Netflix" -a || echo "No changes to commit"
+          git push
