@@ -110,7 +110,7 @@ with st.sidebar:
 
 open_jobs = (jobs_df['Job Status'].value_counts()).reset_index()
 with st.container(border=False):
-    cols = st.columns(4)
+    cols = st.columns(3)
     with cols[0]:
         st.metric(label="**TOTAL JOBS**", value=f"{len(jobs_df)}")
     for i, row in open_jobs.iterrows():
