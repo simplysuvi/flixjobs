@@ -34,7 +34,7 @@ def get_job_infos(response):
 
 
 def main():
-  response = get('https://jobs.netflix.com/api/search')
+  response = requests.get('https://jobs.netflix.com/api/search')
   result = json.loads(response.text)
   num_pages = result['info']['postings']['num_pages']
   
