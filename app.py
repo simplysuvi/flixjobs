@@ -6,7 +6,7 @@ import os
 import json
 import pytz
 from datetime import datetime, timedelta
-from plot_functions import plot_timeline, plot_dayoftheweek, plot_months, plot_timeoftheday, plot_jobs_by_location, plot_jobs_by_team, plot_daysActive
+from plot_functions import plot_timeline, plot_dayoftheweek, plot_months, plot_timeoftheday, plot_jobs_by_location, plot_jobs_by_team, plot_jobs_by_subteam, plot_daysActive
 
 st.set_page_config(page_title='Netflix Jobs Dashboard', layout="wide")
 
@@ -178,9 +178,9 @@ if not jobs_df.empty:
     fig_timeoftheDay = plot_timeoftheday(jobs_df)
     st.plotly_chart(fig_timeoftheDay, use_container_width=True)
 
-    # Plotting the number of roles in each team
-    fig_jobsByTeam = plot_jobs_by_team(jobs_df)
-    st.plotly_chart(fig_jobsByTeam, use_container_width=True)
+    # Plotting the number of roles in each subteam
+    fig_jobsBySubteam = plot_jobs_by_subteam(jobs_df)
+    st.plotly_chart(fig_jobsBySubteam, use_container_width=True)
     
     # Plotting the number of roles in each location
     fig_jobsByLocation = plot_jobs_by_location(jobs_df)
