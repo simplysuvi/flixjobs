@@ -10,7 +10,7 @@ def plot_timeline(df):
                   title='Timeline of Netflix Job Postings', markers=True,
                  labels={'Title': 'Number of Jobs', 'Posting Date Time': 'Date'})
     fig.update_traces(marker=dict(color='black',size=8),
-                      line=dict(color='lightred',width=3),
+                      line=dict(color='red',width=3),
                       hovertemplate='<b>Date: %{x}</b><br><b>Jobs Posted: %{y}</b>')
 
     # Update layout
@@ -50,7 +50,7 @@ def plot_months(df):
         labels={"x": "Month", "y": "Number of Job Postings"}
     )
     fig.update_traces(marker=dict(color='black',size=6),
-                      line=dict(color='lightgreen',width=3),
+                      line=dict(color='red',width=3),
                       hovertemplate='<b>Month: %{x}</b><br><b>Jobs Posted: %{y}</b>')
     fig.update_xaxes(range=[1,12], dtick=1)
     return fig
@@ -68,7 +68,7 @@ def plot_timeoftheday(df):
         labels={"x": "Hour of the Day", "y": "Number of Job Postings"}
     )
     fig.update_traces(marker=dict(color='black',size=6),
-                      line=dict(color='lightgreen',width=3),
+                      line=dict(color='red',width=3),
                       hovertemplate='<b>Hour of the Day: %{x}</b><br><b>Jobs Posted: %{y}</b>')
 
     # Set x-axis range from 0 to 23 (for 24-hour format)
@@ -92,7 +92,7 @@ def plot_jobs_by_location(df):
                  title='Number of Netflix Job Roles by Country',
                  labels={'Number of Roles': 'Number of Roles', 'Location': 'Location'},
                  color='Number of Roles',
-                 color_continuous_scale='Greens')
+                 color_continuous_scale='Reds')
     fig.update_layout(showlegend=False)
     fig.update(layout_coloraxis_showscale=False)
 
@@ -117,7 +117,7 @@ def plot_jobs_by_team(df):
                  title='Number of Netflix Job Roles by Team',
                  labels={'Number of Roles': 'Number of Roles', 'Team': 'Team'},
                  color='Number of Roles',
-                 color_continuous_scale='Greens')
+                 color_continuous_scale='Reds')
     fig.update_layout(showlegend=False)
     fig.update(layout_coloraxis_showscale=False)
 
