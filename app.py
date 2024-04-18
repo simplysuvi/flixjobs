@@ -163,8 +163,9 @@ if not jobs_df.empty:
     st.plotly_chart(fig_jobsByTeam, use_container_width=True)
 
     # Plotting the number of roles in each subteam
-    fig_jobsBySubteam = plot_jobs_by_subteam(jobs_df)
-    st.plotly_chart(fig_jobsBySubteam, use_container_width=True)
+    with st.expander('Subteam Jobs Distribution'):
+        fig_jobsBySubteam = plot_jobs_by_subteam(jobs_df)
+        st.plotly_chart(fig_jobsBySubteam, use_container_width=True)
     
     # Plotting the number of roles in each location
     fig_jobsByLocation = plot_jobs_by_location(jobs_df)
