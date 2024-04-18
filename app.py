@@ -157,26 +157,10 @@ with st.expander('**Recently :red[Closed] Jobs**'):
 
 
 if not jobs_df.empty:
-    
-    # Plotting the distribution of days active for the job postings
-    fig_daysActive = plot_daysActive(jobs_df)
-    st.plotly_chart(fig_daysActive, use_container_width=True)
 
-    # Plotting the timeline of job postings
-    fig_timeline = plot_timeline(jobs_df)
-    st.plotly_chart(fig_timeline, use_container_width=True)
-
-    # Plotting the distribution of job postings by day of the week
-    fig_dayoftheWeek = plot_dayoftheweek(jobs_df)
-    st.plotly_chart(fig_dayoftheWeek, use_container_width=True)
-    
-    # Plotting the distribution of job postings by month
-    fig_months = plot_months(jobs_df)
-    st.plotly_chart(fig_months, use_container_width=True)
-    
-    # Plotting the distribution of job postings by time of the day
-    fig_timeoftheDay = plot_timeoftheday(jobs_df)
-    st.plotly_chart(fig_timeoftheDay, use_container_width=True)
+    # Plotting the number of roles in each team
+    fig_jobsByTeam = plot_jobs_by_team(jobs_df)
+    st.plotly_chart(fig_jobsByTeam, use_container_width=True)
 
     # Plotting the number of roles in each subteam
     fig_jobsBySubteam = plot_jobs_by_subteam(jobs_df)
@@ -185,6 +169,26 @@ if not jobs_df.empty:
     # Plotting the number of roles in each location
     fig_jobsByLocation = plot_jobs_by_location(jobs_df)
     st.plotly_chart(fig_jobsByLocation, use_container_width=True)
+    
+    # Plotting the timeline of job postings
+    fig_timeline = plot_timeline(jobs_df)
+    st.plotly_chart(fig_timeline, use_container_width=True)
+    
+    # Plotting the distribution of days active for the job postings
+    fig_daysActive = plot_daysActive(jobs_df)
+    st.plotly_chart(fig_daysActive, use_container_width=True)
+
+    # Plotting the distribution of job postings by month
+    fig_months = plot_months(jobs_df)
+    st.plotly_chart(fig_months, use_container_width=True)
+    
+    # Plotting the distribution of job postings by day of the week
+    fig_dayoftheWeek = plot_dayoftheweek(jobs_df)
+    st.plotly_chart(fig_dayoftheWeek, use_container_width=True)
+    
+    # Plotting the distribution of job postings by time of the day
+    fig_timeoftheDay = plot_timeoftheday(jobs_df)
+    st.plotly_chart(fig_timeoftheDay, use_container_width=True)
     
 else:
     st.error('No data to show')
