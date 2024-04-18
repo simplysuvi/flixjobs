@@ -126,6 +126,29 @@ def plot_jobs_by_team(df):
 
     return fig
 
+# Function to plot the number of roles in each subteam
+def plot_jobs_by_subteam(df):
+    subteam_counts = df['Subteam'].value_counts()
+    subteam_counts = subteam_counts.sort_values(ascending=True)
+
+    subteam_counts_df = subteam_counts.reset_index()
+    subteam_counts_df.columns = ['Subteam', 'Number of Roles']
+
+    # Create Plotly bar chart using the DataFrame
+    fig = px.bar(subteam_counts_df, y='Subteam', x='Number of Roles',
+                 text='Number of Roles',
+                 title='Number of Netflix Job Roles by Subteam',
+                 labels={'Number of Roles': 'Number of Roles', 'Subteam': 'Subteam'},
+                 color='Number of Roles',
+                 color_continuous_scale='Reds')
+    fig.update_layout(showlegend=False)
+    fig.update(layout_coloraxis_showscale=False)
+
+    fig_height = len(subteam_counts_df) * 50
+    fig.update_layout(height=fig_height)
+
+    return fig
+
 
 def plot_daysActive(df):
     # Create a histogram to show the distribution of 'Days Active'
