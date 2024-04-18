@@ -10,6 +10,7 @@ def load_data():
     current = pd.read_json('data/netflix_jobs_new.json')
     for df in [master, previous, current]:
         df['Posting Date Time'] = pd.to_datetime(df['Posting Date Time'])
+        df['Posting Date'] = pd.to_datetime(df['Posting Date'].dt.date)
     return master, previous, current
 
 def find_jobs(master, previous, current):
