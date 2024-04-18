@@ -121,7 +121,7 @@ def plot_jobs_by_team(df):
     fig.update_layout(showlegend=False)
     fig.update(layout_coloraxis_showscale=False)
 
-    fig_height = len(team_counts_df) * 50
+    fig_height = len(team_counts_df) * 40
     fig.update_layout(height=fig_height)
 
     return fig
@@ -144,7 +144,7 @@ def plot_jobs_by_subteam(df):
     fig.update_layout(showlegend=False)
     fig.update(layout_coloraxis_showscale=False)
 
-    fig_height = len(subteam_counts_df) * 50
+    fig_height = len(subteam_counts_df) * 40
     fig.update_layout(height=fig_height)
 
     return fig
