@@ -26,7 +26,7 @@ def update_job_status(master, removed_jobs):
     """Update days active and job status for each job."""
     current_date = datetime.now()
     master['Days Active'] = master.apply(
-        lambda row: (current_date - pd.to_datetime(row['Posting Date Time'])).days if row['Id'] not in removed_jobs['Id'].values else (current_date - timedelta(days=1) - pd.to_datetime(row['Posting Date Time'])).days, 
+        lambda row: (current_date - pd.to_datetime(row['Posting Date'])).days if row['Id'] not in removed_jobs['Id'].values else (current_date - timedelta(days=1) - pd.to_datetime(row['Posting Date'])).days, 
         axis=1
     )
     master['Job Status'] = master.apply(
