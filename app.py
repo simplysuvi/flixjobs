@@ -7,7 +7,7 @@ import json
 import pytz
 from datetime import datetime, timedelta
 
-st.set_page_config(page_title='Netflix Jobs Dashboard', layout="wide"')
+st.set_page_config(page_title='Netflix Jobs Dashboard', layout="wide")
 
 
 def clear_multi():
