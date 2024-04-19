@@ -35,8 +35,11 @@ jobs_df['Posting Date Time'] = pd.to_datetime(jobs_df['Posting Date Time'])
 jobs_df['Posting Date'] = pd.to_datetime(jobs_df['Posting Date'])
 jobs_df.set_index('Posting Date', inplace=True)
 postings_per_day = jobs_df.resample('D').count()
-fig, ax = calplot.calplot(postings_per_day['Id'], cmap='YlGn', linewidth=0.5)
+fig, ax = calplot.calplot(postings_per_day['Id'], cmap='Reds', linewidth=0.5)
 st.pyplot(fig)
+
+
+
 jobs_df['Posting Date Time'] = jobs_df['Posting Date Time'].dt.tz_convert('America/New_York')
 jobs_df['Posting Date'] = jobs_df['Posting Date'].dt.strftime('%B %d, %Y')
 
