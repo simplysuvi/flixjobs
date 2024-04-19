@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
+import calplot
 import os
 import json
 import pytz
@@ -40,6 +41,16 @@ jobs_df['Hour'] = jobs_df['Posting Date Time'].dt.hour
 jobs_df['Month'] = (pd.to_datetime(jobs_df['Posting Date'])).dt.to_period('M').dt.strftime('%B')
 # Sort the DataFrame by 'Posting Date Time' in descending order
 jobs_df = jobs_df.sort_values(by='Posting Date Time', ascending=False)
+
+# Group the data by date and count the number of updates per day
+updates_per_day = jobs_df['Posting Date Time'].dt.date.value_counts().sort_index()
+
+# Convert the series back to a datetime format (calplot needs this)
+updates_per_day.index = pd.to_datetime(updates_per_day.index)
+
+# Plot the heatmap
+calplot.calplot(updates_per_day, cmap='YlGn', linewidth=0.5)
+
 
 # IDENTIFY RECENTLY ADDED AND REMOVED JOBS
 added_jobs = pd.DataFrame()
