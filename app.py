@@ -32,7 +32,7 @@ recent_added_jobs = pd.read_json('data/netflix_jobs_recently_added.json')
 jobs_df['Posting Date'] = pd.to_datetime(jobs_df['Posting Date'])
 jobs_df['Posting Date Time'] = pd.to_datetime(jobs_df['Posting Date Time'])
 def plot_update_frequencies(df):
-    df['Posting Date'] = jobs_df['Posting Date'].dt.date
+    df['Posting Date'] = pd.to_datetime(jobs_df['Posting Date'])
     # Set 'created_at' as the index
     df.set_index('Posting Date', inplace=True)
     
