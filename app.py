@@ -31,6 +31,13 @@ recent_added_jobs = pd.read_json('data/netflix_jobs_recently_added.json')
 # PREPROCESS DATA
 jobs_df['Posting Date'] = pd.to_datetime(jobs_df['Posting Date'])
 jobs_df['Posting Date Time'] = pd.to_datetime(jobs_df['Posting Date Time'])
+def plot_update_frequencies(data):
+    updates_per_day = data['Posting Date Time'].dt.date.value_counts().sort_index()
+    updates_per_day.index = pd.to_datetime(updates_per_day.index)
+    calplot.calplot(updates_per_day, cmap='YlGn', linewidth=0.5)
+
+# If your data is already loaded and prepared
+plot_update_frequencies(jobs_df)
 jobs_df['Posting Date Time'] = jobs_df['Posting Date Time'].dt.tz_convert('America/New_York')
 jobs_df['Posting Date'] = jobs_df['Posting Date'].dt.strftime('%B %d, %Y')
 
@@ -42,13 +49,7 @@ jobs_df['Month'] = (pd.to_datetime(jobs_df['Posting Date'])).dt.to_period('M').d
 # Sort the DataFrame by 'Posting Date Time' in descending order
 jobs_df = jobs_df.sort_values(by='Posting Date Time', ascending=False)
 
-def plot_update_frequencies(data):
-    updates_per_day = data['Posting Date Time'].dt.date.value_counts().sort_index()
-    updates_per_day.index = pd.to_datetime(updates_per_day.index)
-    calplot.calplot(updates_per_day, cmap='YlGn', linewidth=0.5)
 
-# If your data is already loaded and prepared
-plot_update_frequencies(jobs_df)
 
 # IDENTIFY RECENTLY ADDED AND REMOVED JOBS
 added_jobs = pd.DataFrame()
