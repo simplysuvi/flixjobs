@@ -38,7 +38,7 @@ def plot_update_frequencies(df):
     
     # Count postings per day
     postings_per_day = df.resample('D').count()
-    calplot.calplot(postings_per_day['job_id'], cmap='YlGn', linewidth=0.5)
+    calplot.calplot(postings_per_day['Id'], cmap='YlGn', linewidth=0.5)
 
 # If your data is already loaded and prepared
 plot_update_frequencies(jobs_df)
