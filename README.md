@@ -1,6 +1,6 @@
 # FlixJobs
 
-FlixHire is a Streamlit application designed to streamline the job search for Netflix positions. It periodically fetches the latest job postings directly from the Netflix job board and presents them in an easy-to-navigate interface. This tool is ideal for job seekers wanting to work at Netflix, providing them with up-to-date job listings and details at their fingertips.
+FlixJobs is a Streamlit application designed to streamline the job search for Netflix positions. It periodically fetches the latest job postings directly from the Netflix job board and presents them in an easy-to-navigate interface. This tool is ideal for job seekers wanting to work at Netflix, providing them with up-to-date job listings and details at their fingertips.
 
 ### Features
 - **Real-time Updates**: Automatically fetches the latest job postings from Netflix.
