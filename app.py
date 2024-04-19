@@ -34,7 +34,7 @@ jobs_df['Posting Date Time'] = pd.to_datetime(jobs_df['Posting Date Time'])
 def plot_update_frequencies(df):
     
     # Set 'created_at' as the index
-    df.set_index('Posting Date Time', inplace=True)
+    df.set_index('Posting Date', inplace=True)
     
     # Count postings per day
     postings_per_day = df.resample('D').count()
