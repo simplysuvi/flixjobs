@@ -32,14 +32,6 @@ recent_added_jobs = pd.read_json('data/netflix_jobs_recently_added.json')
 jobs_df['Posting Date'] = pd.to_datetime(jobs_df['Posting Date'])
 jobs_df['Posting Date Time'] = pd.to_datetime(jobs_df['Posting Date Time'])
 
-jobs_df['Posting Date'] = pd.to_datetime(jobs_df['Posting Date'])
-jobs_df.set_index('Posting Date', inplace=True)
-postings_per_day = jobs_df.resample('D').count()
-fig, ax = calplot.calplot(postings_per_day['Id'], cmap='Reds', linewidth=0.5, figsize=(10,10), suptitle='Netflix Job Postings by Day')
-st.pyplot(fig)
-
-
-
 jobs_df['Posting Date Time'] = jobs_df['Posting Date Time'].dt.tz_convert('America/New_York')
 jobs_df['Posting Date'] = jobs_df['Posting Date'].dt.strftime('%B %d, %Y')
 
