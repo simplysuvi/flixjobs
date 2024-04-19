@@ -43,7 +43,7 @@ def plot_update_frequencies(df):
 # If your data is already loaded and prepared
 plot_update_frequencies(jobs_df)
 jobs_df['Posting Date Time'] = jobs_df['Posting Date Time'].dt.tz_convert('America/New_York')
-jobs_df['Posting Date'] = jobs_df['Posting Date'].dt.strftime('%B %d, %Y')
+# jobs_df['Posting Date'] = jobs_df['Posting Date'].dt.strftime('%B %d, %Y')
 
 # Extract day of the week and posting time
 jobs_df['Day of Week'] = jobs_df['Posting Date Time'].dt.day_name()
