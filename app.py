@@ -42,15 +42,13 @@ jobs_df['Month'] = (pd.to_datetime(jobs_df['Posting Date'])).dt.to_period('M').d
 # Sort the DataFrame by 'Posting Date Time' in descending order
 jobs_df = jobs_df.sort_values(by='Posting Date Time', ascending=False)
 
-# Group the data by date and count the number of updates per day
-updates_per_day = jobs_df['Posting Date Time'].dt.date.value_counts().sort_index()
+def plot_update_frequencies(data):
+    updates_per_day = data['Posting Date Time'].dt.date.value_counts().sort_index()
+    updates_per_day.index = pd.to_datetime(updates_per_day.index)
+    calplot.calplot(updates_per_day, cmap='YlGn', linewidth=0.5)
 
-# Convert the series back to a datetime format (calplot needs this)
-updates_per_day.index = pd.to_datetime(updates_per_day.index)
-
-# Plot the heatmap
-calplot.calplot(updates_per_day, cmap='YlGn', linewidth=0.5)
-
+# If your data is already loaded and prepared
+plot_update_frequencies(jobs_df)
 
 # IDENTIFY RECENTLY ADDED AND REMOVED JOBS
 added_jobs = pd.DataFrame()
