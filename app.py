@@ -155,7 +155,7 @@ with st.expander('**Recently :green[Added] Jobs**'):
 
 with st.expander('**Recently :red[Closed] Jobs**'):
     if not removed_jobs.empty:
-        st.dataframe(removed_jobs[['Id', 'Title', 'Location']], use_container_width=True, hide_index=True)
+        st.dataframe(removed_jobs[['Title', 'Team', 'Location', 'Days Active']], use_container_width=True, hide_index=True)
     else:
         st.error("No jobs have been closed recently.")
 
