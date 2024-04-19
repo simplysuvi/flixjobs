@@ -44,7 +44,7 @@ jobs_df['Posting Date Time'] = jobs_df['Posting Date Time'].dt.tz_convert('Ameri
 jobs_df['Day of Week'] = jobs_df['Posting Date Time'].dt.day_name()
 jobs_df['Posting Time'] = jobs_df['Posting Date Time'].dt.time
 jobs_df['Hour'] = jobs_df['Posting Date Time'].dt.hour
-jobs_df['Month'] = (pd.to_datetime(jobs_df['Posting Date'])).dt.to_period('M').dt.strftime('%B')
+# jobs_df['Month'] = (pd.to_datetime(jobs_df['Posting Date'])).dt.to_period('M').dt.strftime('%B')
 # Sort the DataFrame by 'Posting Date Time' in descending order
 jobs_df = jobs_df.sort_values(by='Posting Date Time', ascending=False)
 
