@@ -148,7 +148,7 @@ st.caption("Source: [Netflix Jobs](%s)" % "https://jobs.netflix.com/")
 
 with st.expander('**Recently :green[Added] Jobs**'):
     if not added_jobs.empty:
-        st.dataframe(added_jobs[['Id','Title', 'Posting Date', 'Location', 'Job URL']], use_container_width=True, hide_index=True)
+        st.dataframe(added_jobs[['Title', 'Subteam', 'Posting Date', 'Location', 'Job URL']], use_container_width=True, hide_index=True)
     else:
         st.error("No new jobs added recently.")
 
