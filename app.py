@@ -34,8 +34,8 @@ jobs_df['Posting Date Time'] = pd.to_datetime(jobs_df['Posting Date Time'])
 
 jobs_df['Posting Date'] = pd.to_datetime(jobs_df['Posting Date'])
 jobs_df.set_index('Posting Date', inplace=True)
-postings_per_day = jobs_df.resample('M').count()
-fig, ax = calplot.calplot(postings_per_day['Id'], cmap='Reds', linewidth=0.5)
+postings_per_day = jobs_df.resample('D').count()
+fig, ax = calplot.calplot(postings_per_day['Id'], cmap='Reds', linewidth=0.5, figsize=(16, 8), suptitle='Netflix Job Postings by Day')
 st.pyplot(fig)
 
 
