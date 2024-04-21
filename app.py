@@ -126,7 +126,7 @@ with st.container(border=False):
             delta = len(added_jobs) if (not added_jobs.empty) else 0
         else:
             label = f"**:red[{job_status.upper()}]**"
-            delta = -(len(removed_jobs) if (not removed_jobs.empty) else -0
+            delta = -(len(removed_jobs)) if (not removed_jobs.empty) else -0
         with cols[i+1]:
             st.metric(label=label, value=count, delta=delta)
 
