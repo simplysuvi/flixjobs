@@ -1,50 +1,53 @@
 import os
 import pandas as pd
-import requests
 from datetime import datetime, timedelta
 
 def load_data():
     """Loads data from JSON files into pandas DataFrames."""
     master = pd.read_json('data/netflix_jobs_master.json')
-    previous = pd.read_json('data/netflix_jobs_last.json')
-    current = pd.read_json('data/netflix_jobs_new.json')
-    for df in [master, previous, current]:
-        df['Posting Date Time'] = pd.to_datetime(df['Posting Date Time'])
-        df['Posting Date'] = pd.to_datetime(df['Posting Date Time'].dt.date)
-    return master, previous, current
+    new = pd.read_json('data/netflix_jobs_new.json')  # Load new daily data
+    master['Posting Date Time'] = pd.to_datetime(master['Posting Date Time'])
+    new['Posting Date Time'] = pd.to_datetime(new['Posting Date Time'])
+    return master, new
 
-def find_jobs(master, previous, current):
-    """Identify new, recently removed, and all removed jobs."""
-    new_jobs = current[~current['Id'].isin(master['Id'])]
-    recently_removed_jobs = previous[~previous['Id'].isin(current['Id'])]
-    new_jobs.to_json('data/netflix_jobs_recently_added.json', orient='records', date_format='iso')
-    recently_removed_jobs.to_json('data/netflix_jobs_recently_removed.json', orient='records', date_format='iso')
-    all_removed_jobs = previous[previous['Id'].isin(master['Id']) & ~previous['Id'].isin(current['Id'])]
-    return new_jobs, recently_removed_jobs, all_removed_jobs
-
-def update_job_status(master, removed_jobs):
-    """Update days active and job status for each job."""
+def update_master(master, new):
+    """Update the master data with new jobs and mark closed jobs."""
     current_date = datetime.now()
-    master['Days Active'] = master.apply(
-        lambda row: (current_date - pd.to_datetime(row['Posting Date'])).days if row['Id'] not in removed_jobs['Id'].values else (current_date - timedelta(days=1) - pd.to_datetime(row['Posting Date'])).days, 
-        axis=1
-    )
-    master['Job Status'] = master.apply(
-        lambda row: 'Closed' if row['Id'] in removed_jobs['Id'].values else 'Open', 
-        axis=1
-    )
-    return master
+    
+    # Identify new jobs not previously in master
+    new_jobs = new[~new['Id'].isin(master['Id'])]
+    new_jobs['Job Status'] = 'Open'
+    new_jobs['Days Active'] = 0  # Initialize days active for new jobs
 
+    # Append new jobs to the master DataFrame
+    updated_master = pd.concat([master, new_jobs], ignore_index=True)
+
+    # Determine recently closed jobs:
+    # These are the jobs that are present in master, marked as 'Open', but not present in new data
+    recently_closed_jobs = master[(master['Id'].isin(updated_master['Id'])) & (master['Job Status'] == 'Open') & (~master['Id'].isin(new['Id']))]['Id']
+    recently_closed_jobs.to_json('data/netflix_jobs_recently_closed_jobs.json', orient='records', date_format='iso')
+    
+    updated_master['Job Status'] = updated_master.apply(
+        lambda row: 'Closed' if row['Id'] in recently_closed_jobs.values else row['Job Status'], axis=1
+    )
+
+    # Update Days Active for all jobs
+    # Recalculate for open jobs and retain for closed jobs
+    updated_master['Days Active'] = updated_master.apply(
+        lambda row: (current_date - row['Posting Date Time']).days if row['Job Status'] == 'Open' else row['Days Active'],
+        axis=1
+    )
+
+    return updated_master
+
+def save_data(master):
+    """Save the updated master data to JSON."""
+    master.to_json('data/netflix_jobs_master.json', orient='records', date_format='iso')
 
 def main():
-    master, previous, current = load_data()
-    new_jobs, recently_removed_jobs, all_removed_jobs = find_jobs(master, previous, current)
-    
-    master = pd.concat([master, new_jobs], ignore_index=True)
-    master.to_json('data/netflix_jobs_master.json', orient='records', date_format='iso')
-    master = update_job_status(master, all_removed_jobs)
-    master.to_json('data/netflix_all_jobs.json', orient='records', date_format='iso')
-    current.to_json('data/netflix_jobs_last.json', orient='records', date_format='iso')
+    master, new = load_data()
+    master = update_master(master, new)
+    save_data(master)
 
 if __name__ == '__main__':
     main()
