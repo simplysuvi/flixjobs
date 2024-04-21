@@ -124,7 +124,7 @@ with st.container(border=False):
         if job_status == 'Open':
             label = f"**:green[{job_status.upper()}]**"
             delta = len(added_jobs) if (not added_jobs.empty) else 0
-        else:
+        if job_status == 'Closed':
             label = f"**:red[{job_status.upper()}]**"
             delta = -(len(removed_jobs)) if (not removed_jobs.empty) else -0
         with cols[i+1]:
