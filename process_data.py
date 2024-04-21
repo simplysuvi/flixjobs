@@ -6,8 +6,10 @@ def load_data():
     """Loads data from JSON files into pandas DataFrames."""
     master = pd.read_json('data/netflix_jobs_master.json')
     new = pd.read_json('data/netflix_jobs_new.json')  # Load new daily data
-    master['Posting Date Time'] = pd.to_datetime(master['Posting Date Time'])
-    new['Posting Date Time'] = pd.to_datetime(new['Posting Date Time'])
+
+    for df in [master, new]:
+        df['Posting Date Time'] = pd.to_datetime(df['Posting Date Time'])
+        df['Posting Date'] = pd.to_datetime(df['Posting Date Time'].dt.date)
     return master, new
 
 def update_master(master, new):
