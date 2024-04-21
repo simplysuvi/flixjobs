@@ -37,7 +37,7 @@ def update_master(master, new):
     # Update Days Active for all jobs
     # Recalculate for open jobs and retain for closed jobs
     updated_master['Days Active'] = updated_master.apply(
-        lambda row: (current_date - row['Posting Date Time']).days if row['Job Status'] == 'Open' else row['Days Active'],
+        lambda row: (current_date - row['Posting Date']).days if row['Job Status'] == 'Open' else row['Days Active'],
         axis=1
     )
 
