@@ -18,6 +18,7 @@ def update_master(master, new):
     new_jobs = new[~new['Id'].isin(master['Id'])]
     new_jobs['Job Status'] = 'Open'
     new_jobs['Days Active'] = 0  # Initialize days active for new jobs
+    new_jobs.to_json('data/netflix_jobs_recently_added.json', orient='records', date_format='iso')
 
     # Append new jobs to the master DataFrame
     updated_master = pd.concat([master, new_jobs], ignore_index=True)
