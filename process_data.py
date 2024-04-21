@@ -27,11 +27,12 @@ def update_master(master, new):
 
     # Determine recently closed jobs:
     # These are the jobs that are present in master, marked as 'Open', but not present in new data
-    recently_closed_jobs = master[(master['Id'].isin(updated_master['Id'])) & (master['Job Status'] == 'Open') & (~master['Id'].isin(new['Id']))]['Id']
+    recently_closed_ids = master[(master['Id'].isin(updated_master['Id'])) & (master['Job Status'] == 'Open') & (~master['Id'].isin(new['Id']))]['Id']
+    recently_closed_jobs = master[(master['Id'].isin(updated_master['Id'])) & (master['Job Status'] == 'Open') & (~master['Id'].isin(new['Id']))]
     recently_closed_jobs.to_json('data/netflix_jobs_recently_removed.json', orient='records', date_format='iso')
     
     updated_master['Job Status'] = updated_master.apply(
-        lambda row: 'Closed' if row['Id'] in recently_closed_jobs.values else row['Job Status'], axis=1
+        lambda row: 'Closed' if row['Id'] in recently_closed_ids.values else row['Job Status'], axis=1
     )
 
     # Update Days Active for all jobs
