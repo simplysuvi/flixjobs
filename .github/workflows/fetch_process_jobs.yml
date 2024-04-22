@@ -4,6 +4,7 @@ on:
   schedule:
     - cron: '0 9 * * *'  # 5 AM EDT -> 9 AM UTC
     - cron: '0 16 * * *'  # 12 PM EDT -> 4 PM UTC
+    - cron: '0 19 * * *'  # 3 PM EDT -> 7 PM UTC
     - cron: '0 20 * * *'  # 4 PM EDT -> 8 PM UTC
     - cron: '0 22 * * *' # 6 PM EDT -> 10 PM UTC
   workflow_dispatch:
