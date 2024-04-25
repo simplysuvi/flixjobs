@@ -5,4 +5,3 @@ seaborn
 plotly
 pytz
 PyGithub
-calplot
