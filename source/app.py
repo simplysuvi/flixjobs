@@ -23,7 +23,7 @@ def clear_multi():
 st.title(":red[N]etflix Jobs Dashboard :globe_with_meridians:")
 
 # LOAD DATA
-jobs_df = pd.read_json('data/netflix_jobs_master.csv')
+jobs_df = pd.read_csv('data/netflix_jobs_master.csv')
 recent_removed_jobs = pd.read_json('data/netflix_jobs_recently_removed.json')
 recent_added_jobs = pd.read_json('data/netflix_jobs_recently_added.json')
 
