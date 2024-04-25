@@ -2,11 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import matplotlib.pyplot as plt
-import calplot
 import os
 import json
 import pytz
-import time
 from datetime import datetime, timedelta
 from plot_functions import plot_timeline, plot_dayoftheweek, plot_months, plot_timeoftheday, plot_jobs_by_location, plot_jobs_by_team, plot_jobs_by_subteam, plot_daysActive
 
@@ -23,19 +21,8 @@ def clear_multi():
 
 st.title(":red[N]etflix Jobs Dashboard :globe_with_meridians:")
 
-start = time.time()
-jobs_df = pd.read_csv('data/netflix_jobs_master.csv')
-stop = time.time()
-st.write(f"{stop-start} seconds")
-
-start = time.time()
-jobs_df = pd.read_json('data/netflix_jobs_master.json')
-stop = time.time()
-st.write(f"{stop-start} seconds")
-
-
 # LOAD DATA
-jobs_df = pd.read_csv('data/netflix_jobs_master.csv')
+jobs_df = pd.read_json('data/netflix_jobs_master.json')
 recent_removed_jobs = pd.read_json('data/netflix_jobs_recently_removed.json')
 recent_added_jobs = pd.read_json('data/netflix_jobs_recently_added.json')
 
