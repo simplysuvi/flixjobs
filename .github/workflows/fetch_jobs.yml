@@ -21,7 +21,7 @@ jobs:
           pip install requests pandas
 
       - name: Run the extraction script
-        run: python fetch_jobs.py
+        run: python source/fetch_jobs.py
 
       - name: Commit and push if there are changes
         run: |

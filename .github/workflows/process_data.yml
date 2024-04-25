@@ -21,7 +21,7 @@ jobs:
           pip install requests pandas
 
       - name: Run the processing script
-        run: python process_data.py
+        run: python source/process_jobs.py
         
       - name: Commit and push if there are changes
         run: |
