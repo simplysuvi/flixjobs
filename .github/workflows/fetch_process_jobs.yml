@@ -27,10 +27,10 @@ jobs:
           pip install requests pandas
 
       - name: Run the extraction script
-        run: python source/fetch_jobs.py
+        run: python source/fetch_data.py
 
       - name: Run the processing script
-        run: python source/process_jobs.py
+        run: python source/process_data.py
         
       - name: Save last updated timestamp as artifact
         run: |
