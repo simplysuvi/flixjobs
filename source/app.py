@@ -127,7 +127,7 @@ with st.container(border=False):
         else:
             label = f"**:red[{job_status.upper()}]**"
             delta = -(len(removed_jobs)) if (not removed_jobs.empty) else 0
-            help = "Removed Jobs and :red[jobs closed today]"
+            help = "Removed Jobs and :red[jobs closed today]" 
         with cols[i+1]:
             st.metric(label=label, value=count, delta=delta, help=help)
 
