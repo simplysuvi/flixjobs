@@ -39,7 +39,7 @@ jobs:
         shell: bash
 
       - name: Upload last updated timestamp as artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: last-updated-timestamp
           path: last_updated.txt
